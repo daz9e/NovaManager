@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\OrganisationModel;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Http\Request;
 class OrganisationController extends Controller
 {
     public function index()
@@ -18,8 +18,15 @@ class OrganisationController extends Controller
         return redirect()->back()->with('success', 'Organisation deleted successfully.');
     }
 
-    public function create()
+    public function create(Request $request)
     {
-        dd("hello!");
+        {
+            $organisation = new OrganisationModel;
+            $organisation->name = $request->input('name');
+            $organisation->inn = $request->input('inn');
+            $organisation->save();
+
+            return redirect()->back()->with('success', 'Организация успешно создана');
+        }
     }
 }

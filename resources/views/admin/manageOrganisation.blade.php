@@ -16,8 +16,8 @@
                         <thead>
                         <tr>
                             <th class="text-center">Название</th>
-                            <th class="text-center">INN</th>
-                            <th class="text-center">Действие</th>
+                            <th class="text-center">ИНН</th>
+                            <th class="text-center">Действия</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -26,13 +26,23 @@
                                 <td class="text-center">{{ $organisation->name }}</td>
                                 <td class="text-center">{{ $organisation->inn }}</td>
                                 <td class="text-center">
-                                    <form id="delete-form-{{ $organisation->id }}" action="{{ route('organisations.destroy', $organisation->id) }}" method="POST" style="display: none;">
-                                        @csrf
-                                        <button type="submit" class="btn btn-light-danger mb-1 me-1">Удалить</button>
-                                    </form>
-                                    <button type="button" class="btn btn-light-danger mb-1 me-1" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $organisation->id }}').submit();">
-                                        Delete
-                                    </button>
+                                    <div>
+                                        <form id="delete-form-{{ $organisation->id }}" action="{{ route('organisations.destroy', $organisation->id) }}" method="POST" style="display: none;">
+                                            @csrf
+                                            <button type="submit" class="btn btn-light-danger mb-1 me-1">Удалить</button>
+                                        </form>
+                                        <button type="button" class="btn btn-light-danger mb-1 me-1" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $organisation->id }}').submit();">
+                                            Удалить
+                                        </button>
+                                        <form id="delete-form-{{ $organisation->id }}" action="{{ route('organisations.destroy', $organisation->id) }}" method="POST" style="display: none;">
+                                            @csrf
+                                            <button type="submit" class="btn btn-light-danger mb-1 me-1">Удалить</button>
+                                        </form>
+                                        <button type="button" class="btn btn-light-secondary mb-1 me-1" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $organisation->id }}').submit();">
+                                            Редактировать
+                                        </button>
+                                    </div>
+
                                 </td>
 
                             </tr>

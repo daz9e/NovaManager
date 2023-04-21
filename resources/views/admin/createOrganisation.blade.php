@@ -10,25 +10,25 @@
             <div class="widget-header">
                 <div class="row">
                     <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                        <h4>Form groups</h4>
+                        <h4>Создать организацию</h4>
                     </div>
                 </div>
             </div>
             <div class="widget-content widget-content-area">
-                <form>
+                <form action="{{ route('organisations.create') }}" method="POST">
+                    @csrf
                     <div class="form-group mb-4">
-                        <label for="formGroupExampleInput">Example label</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input">
+                        <label for="formGroupExampleInput">Название</label>
+                        <input type="text" name="name" class="form-control" id="formGroupExampleInput" placeholder="ИТ-НОВА">
                     </div>
                     <div class="form-group mb-4">
-                        <label for="formGroupExampleInput2">Another label</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
+                        <label for="formGroupExampleInput2">ИНН</label>
+                        <input type="text" name="inn" class="form-control" id="formGroupExampleInput2" placeholder="12345678">
                     </div>
-                    <input type="submit" name="time" class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary">Создать</button>
                 </form>
-
-
             </div>
+
         </div>
     </div>
 @endsection
