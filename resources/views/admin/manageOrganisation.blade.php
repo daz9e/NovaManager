@@ -26,14 +26,15 @@
                                 <td class="text-center">{{ $organisation->name }}</td>
                                 <td class="text-center">{{ $organisation->inn }}</td>
                                 <td class="text-center">
-                                    <a href="#" class="action-btn btn-edit bs-tooltip me-2" data-toggle="tooltip" data-placement="top" title="Delete" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $organisation->id }}').submit();">
-                                        Delete
-                                    </a>
                                     <form id="delete-form-{{ $organisation->id }}" action="{{ route('organisations.destroy', $organisation->id) }}" method="POST" style="display: none;">
                                         @csrf
-                                        <input type="submit" value="Delete">
+                                        <button type="submit" class="btn btn-light-danger mb-1 me-1">Удалить</button>
                                     </form>
+                                    <button type="button" class="btn btn-light-danger mb-1 me-1" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $organisation->id }}').submit();">
+                                        Delete
+                                    </button>
                                 </td>
+
                             </tr>
                         @endforeach
                         </tbody>
