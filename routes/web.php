@@ -21,9 +21,8 @@ Route::get('/', function () {
 Route::get('/adminOrganisation', [App\Http\Controllers\OrganisationController::class, 'index'])->name("adminOrganisation");
 Route::post('/organisationsDestroy/{organisation}', [App\Http\Controllers\OrganisationController::class, 'destroy'])->name('organisations.destroy');
 Route::post('/organisations/create', [App\Http\Controllers\OrganisationController::class, 'create'])->name('organisations.create');
-Route::get('/createOrganisation', function () {
-    return view('admin.createOrganisation');
-})->name('organisations.createPage');
+Route::post('/organisations/create', [App\Http\Controllers\OrganisationController::class, 'update'])->name('organisations.update');
+Route::get('/manageOrganisation', [App\Http\Controllers\OrganisationController::class, 'manageOrganisation'])->name('organisations.createPage');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

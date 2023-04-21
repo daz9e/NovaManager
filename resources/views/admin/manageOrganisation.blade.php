@@ -34,7 +34,7 @@
                                         <button type="button" class="btn btn-light-danger mb-1 me-1" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $organisation->id }}').submit();">
                                             Удалить
                                         </button>
-                                        <form id="delete-form-{{ $organisation->id }}" action="{{ route('organisations.destroy', $organisation->id) }}" method="POST" style="display: none;">
+                                        <form id="delete-form-{{ $organisation->id }}" action="{{ route('organisations.manageOrganisation', $organisation->id) }}" method="POST" style="display: none;">
                                             @csrf
                                             <button type="submit" class="btn btn-light-danger mb-1 me-1">Удалить</button>
                                         </form>
