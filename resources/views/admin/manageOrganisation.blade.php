@@ -44,7 +44,7 @@
     </div>
 </div>
 
-<div id="basic" class="col-lg-12 layout-spacing">
+{{--<div id="basic" class="col-lg-12 layout-spacing">
     <div class="statbox widget box box-shadow">
         <div class="widget-header">
             <div class="row">
@@ -69,4 +69,4 @@
 
         </div>
     </div>
-</div>
+</div>--}}
