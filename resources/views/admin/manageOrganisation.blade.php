@@ -49,7 +49,7 @@
         <div class="widget-header">
             <div class="row">
                 <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                    <h4>Input Text</h4>
+                    <h4>Добавить организацию</h4>
                 </div>
             </div>
         </div>
@@ -57,10 +57,13 @@
 
             <div class="row">
                 <div class="col-lg-6 col-12 ">
-                    <form method="post">
+                    <form method="POST" action="{{ route('organisations.create') }}">
+                        @csrf
                         <div class="form-group">
                             <label for="t-text" class="visually-hidden">Text</label>
-                            <input id="t-text" type="text" name="txt" placeholder="Some Text..." class="form-control" required="">
+                            <input id="name_organisation" type="text" name="name" placeholder="Название" class="form-control" required="">
+                            <label for="t-text" class="visually-hidden">Text</label>
+                            <input id="inn_organisation" type="text" name="inn" placeholder="ИНН" class="form-control mt-2" required="">
                             <input type="submit" name="txt" class="mt-4 btn btn-primary">
                         </div>
                     </form>
