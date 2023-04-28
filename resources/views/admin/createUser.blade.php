@@ -1,46 +1,67 @@
+<head>
+    <!-- Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+<div id="basic" class="col-lg-12 layout-spacing">
+    <div class="statbox widget h-full  box box-shadow flex justify-center">
+        <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+            <form method="POST" action="{{ route('register') }}">
+                @csrf
+                <!-- Name -->
+                <div>
+                    <x-input-label for="name" :value="__('Name')" />
+                    <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')"
+                        required autofocus autocomplete="name" />
+                    <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                </div>
 
-<div class="table-responsive">
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Number of Users</th>
-            <th scope="col">INN</th>
-            <th scope="col"></th>
-        </tr>
-        <tr aria-hidden="true" class="mt-3 d-block table-row-hidden"></tr>
-        </thead>
-        <tbody>
-        @foreach($organisations as $organisation)
-            <tr>
-                <td>
-                    <div class="media">
-                        <div class="media-body align-self-center">
-                            <h6 class="mb-0">{{ $organisation->name }}</h6>
-                        </div>
-                    </div>
-                </td>
-                <td>{{ $organisation->members }}</td>
-                <td>{{ $organisation->inn }}</td>
-                <td class="text-center">
-                    <div class="action-btns">
-                        {{--<a href="{{ route('organisations.show', $organisation->id) }}" class="action-btn btn-view bs-tooltip me-2" data-toggle="tooltip" data-placement="top" title="View">
-                            View
-                        </a>
-                        <a href="{{ route('organisations.edit', $organisation->id) }}" class="action-btn btn-edit bs-tooltip me-2" data-toggle="tooltip" data-placement="top" title="Edit">
-                            Edit
-                        </a>--}}
-                        <a href="{{ route('organisations.destroy', $organisation->id) }}" class="action-btn btn-edit bs-tooltip me-2" data-toggle="tooltip" data-placement="top" title="Edit">
-                            Delete
-                        </a>
-                    </div>
-                </td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
+                <!-- Email Address -->
+                <div class="mt-4">
+                    <x-input-label for="email" :value="__('Email')" />
+                    <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')"
+                        required autocomplete="username" />
+                    <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                </div>
 
-</div>
-<div class="text-center mt-3">
-    <a href="{{ route('organisations.create') }}"  class="btn btn-outline-primary mb-2 me-4">Create Organisation</a>
+                <!-- Password -->
+                <div class="mt-4">
+                    <x-input-label for="password" :value="__('Password')" />
+
+                    <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required
+                        autocomplete="new-password" />
+
+                    <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                </div>
+
+                <!-- Confirm Password -->
+                <div class="mt-4">
+                    <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+
+                    <x-text-input id="password_confirmation" class="block mt-1 w-full" type="password"
+                        name="password_confirmation" required autocomplete="new-password" />
+
+                    <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+                </div>
+
+                <!-- Organisation Id -->
+                <div class="mt-4">
+                    <x-input-label for="organisation" :value="__('Organisation')" />
+                    <x-text-input id="organisation" class="block mt-1 w-full" type="text" name="organisation"
+                        :value="old('organisation')" required autofocus autocomplete="organisation" />
+                    <x-input-error :messages="$errors->get('organisation')" class="mt-2" />
+                </div>
+
+                <div class="flex items-center justify-end mt-4">
+                    <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        href="{{ route('login') }}">
+                        {{ __('Already registered?') }}
+                    </a>
+
+                    <x-primary-button class="ml-4">
+                        {{ __('Register') }}
+                    </x-primary-button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
