@@ -6,6 +6,11 @@
 
 
 @section('content')
-    @include('admin.manageOrganisation')
+    @if(URL::current() === url('/organisations'))
+        @include('admin.manageOrganisation')
+    @endif
+    @if(URL::current() === url('/register'))
+        @include('admin.createUser')
+    @endif
 @endsection
 

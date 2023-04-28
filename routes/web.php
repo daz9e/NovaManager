@@ -22,6 +22,8 @@ Route::get('/organisations', [App\Http\Controllers\OrganisationController::class
 Route::post('/organisationsDestroy/{organisation}', [App\Http\Controllers\OrganisationController::class, 'destroy'])->name('organisations.destroy');
 Route::post('/organisations/create', [App\Http\Controllers\OrganisationController::class, 'store'])->name('organisations.create');
 
+Route::get('/register', [App\Http\Controllers\Auth\RegisteredUserController::class, 'index'])->name("register");
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
