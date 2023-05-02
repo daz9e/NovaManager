@@ -21,8 +21,9 @@ class RegisteredUserController extends Controller
      */
     public function index(): View
     {
-        $organisations = OrganisationModel::all();
-        return view('admin.organisationPage', compact('organisations'));
+        $organizations = OrganisationModel::all();
+        $organizationsName = $organizations->pluck('name'); 
+        return view('admin.organisationPage', compact('organizationsName'));
     }
 
     /**
@@ -36,14 +37,15 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'organisation' => ['required', 'integer'],
+            'organization' => ['required', 'string'],
         ]);
 
+        $org = OrganisationModel::where('name', $request->organization)->first();
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'organisation_id' => $request->organisation,
+            'organisation_id' => $org->id,
         ]);
 
         event(new Registered($user));

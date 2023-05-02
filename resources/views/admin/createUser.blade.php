@@ -45,10 +45,11 @@
 
                 <!-- Organisation Id -->
                 <div class="mt-4">
-                    <x-input-label for="organisation" :value="__('Organisation')" />
-                    <x-text-input id="organisation" class="block mt-1 w-full" type="text" name="organisation"
-                        :value="old('organisation')" required autofocus autocomplete="organisation" />
-                    <x-input-error :messages="$errors->get('organisation')" class="mt-2" />
+                    <x-input-label for="organization" :value="__('Organization')" />
+                    <!-- <x-text-input id="organisation" class="block mt-1 w-full" type="text" name="organisation"
+                        :value="old('organisation')" required autofocus autocomplete="organisation" /> -->
+                    <x-input-select id="organization" class="block mt-1 w-full" name="organization" :values="$organizationsName" />
+                    <x-input-error :messages="$errors->get('organization')" class="mt-2" />
                 </div>
 
                 <div class="flex items-center justify-end mt-4">

@@ -23,6 +23,8 @@ Route::post('/organisationsDestroy/{organisation}', [App\Http\Controllers\Organi
 Route::post('/organisations/create', [App\Http\Controllers\OrganisationController::class, 'store'])->name('organisations.create');
 
 Route::get('/register', [App\Http\Controllers\Auth\RegisteredUserController::class, 'index'])->name("register");
+Route::post('/register', [App\Http\Controllers\Auth\RegisteredUserController::class, 'store']);
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
