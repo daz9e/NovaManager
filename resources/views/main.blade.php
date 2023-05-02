@@ -38,7 +38,7 @@
     <!--  END SIDEBAR  -->
 
     <!--  BEGIN CONTENT AREA  -->
-    <div id="content" class="main-content">
+    <div id="content" class="main-content ">
         <div class="layout-px-spacing">
             <div class="middle-content container-xxl p-0">
                 <div class="row layout-top-spacing">

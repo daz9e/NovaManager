@@ -9,36 +9,40 @@
         </div>
         <div class="widget-content widget-content-area">
             @if ($organisations->isEmpty())
-                <p>Нет доступных организаций.</p>
+            <p>Нет доступных организаций.</p>
             @else
-                <div class="table-responsive">
-                    <table class="table table-bordered mb-4">
-                        <thead>
+            <div class="table-responsive">
+                <table class="table table-bordered mb-4">
+                    <thead>
                         <tr>
                             <th class="text-center">Название</th>
                             <th class="text-center">INN</th>
                             <th class="text-center">Действие</th>
                         </tr>
-                        </thead>
-                        <tbody>
+                    </thead>
+                    <tbody>
                         @foreach($organisations as $organisation)
-                            <tr>
-                                <td class="text-center">{{ $organisation->name }}</td>
-                                <td class="text-center">{{ $organisation->inn }}</td>
-                                <td class="text-center">
-                                    <a href="#" class="action-btn btn-edit bs-tooltip me-2" data-toggle="tooltip" data-placement="top" title="Delete" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $organisation->id }}').submit();">
-                                        Delete
-                                    </a>
-                                    <form id="delete-form-{{ $organisation->id }}" action="{{ route('organisations.destroy', $organisation->id) }}" method="POST" style="display: none;">
-                                        @csrf
-                                        <input type="submit" value="Delete">
-                                    </form>
-                                </td>
-                            </tr>
+                        <tr>
+                            <td class="text-center">{{ $organisation->name }}</td>
+                            <td class="text-center">{{ $organisation->inn }}</td>
+                            <td class="text-center">
+                                <a href="#" class="action-btn btn-edit bs-tooltip me-2" data-toggle="tooltip"
+                                    data-placement="top" title="Delete"
+                                    onclick="event.preventDefault(); document.getElementById('delete-form-{{ $organisation->id }}').submit();">
+                                    Delete
+                                </a>
+                                <form id="delete-form-{{ $organisation->id }}"
+                                    action="{{ route('organisations.destroy', $organisation->id) }}" method="POST"
+                                    style="display: none;">
+                                    @csrf
+                                    <input type="submit" value="Delete">
+                                </form>
+                            </td>
+                        </tr>
                         @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                    </tbody>
+                </table>
+            </div>
             @endif
         </div>
     </div>
@@ -54,16 +58,17 @@
             </div>
         </div>
         <div class="widget-content widget-content-area">
-
             <div class="row">
                 <div class="col-lg-6 col-12 ">
                     <form method="POST" action="{{ route('organisations.create') }}">
                         @csrf
                         <div class="form-group">
                             <label for="t-text" class="visually-hidden">Text</label>
-                            <input id="name_organisation" type="text" name="name" placeholder="Название" class="form-control" required="">
+                            <input id="name_organisation" type="text" name="name" placeholder="Название"
+                                class="form-control" required="">
                             <label for="t-text" class="visually-hidden">Text</label>
-                            <input id="inn_organisation" type="text" name="inn" placeholder="ИНН" class="form-control mt-2" required="">
+                            <input id="inn_organisation" type="text" name="inn" placeholder="ИНН"
+                                class="form-control mt-2" required="">
                             <input type="submit" name="txt" class="mt-4 btn btn-primary">
                         </div>
                     </form>
