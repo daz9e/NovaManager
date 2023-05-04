@@ -1,45 +1,66 @@
+# For more information: https://laravel.com/docs/sail
 version: '3'
-
 services:
     app:
         build:
-            context: ./docker/8.1
+            context: ./docker/app
             dockerfile: Dockerfile
-        image: my-laravel-app
-        container_name: app
-        ports:
-            - "80:80"
-        volumes:
-            - ./:/var/www/html
-        env_file:
-            - .env
-        depends_on:
-            - postgresql
-        networks:
-            - laravel_network
-
-    postgresql:
-        image: postgres:13
-        container_name: postgresql
-        restart: unless-stopped
-        tty: true
-        ports:
-            - "5432:5432"
+            args:
+                WWWGROUP: '${WWWGROUP}'
+        image: nova_site
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
         environment:
-            POSTGRES_DB: laravel
-            POSTGRES_USER: user
-            POSTGRES_PASSWORD: password
-            SERVICE_TAGS: dev
-            SERVICE_NAME: postgresql
+            WWWUSER: '${WWWUSER}'
+            LARAVEL_SAIL: 1
+            XDEBUG_MODE: '${SAIL_XDEBUG_MODE:-off}'
+            XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
         volumes:
-            - ./data/postgresql:/var/lib/postgresql/data
-            - ./docker/postgresql/my.cnf:/etc/postgresql/conf.d/my.cnf
+            - '.:/var/www/html'
         networks:
-            - laravel_network
-
-volumes:
-    my-laravel-postgresql:
-
+            - nova_site
+        depends_on:
+            - pgsql
+    pgsql:
+        image: 'postgres:14'
+        ports:
+            - '${FORWARD_DB_PORT:-5432}:5432'
+        environment:
+            PGPASSWORD: '${DB_PASSWORD:-secret}'
+            POSTGRES_DB: '${DB_DATABASE}'
+            POSTGRES_USER: '${DB_USERNAME}'
+            POSTGRES_PASSWORD: '${DB_PASSWORD:-secret}'
+        volumes:
+            - 'nova_site-pgsql:/var/lib/postgresql/data'
+        networks:
+            - nova_site
+        healthcheck:
+            test: [ "CMD", "pg_isready", "-q", "-d", "${DB_DATABASE}", "-U", "${DB_USERNAME}" ]
+            retries: 3
+            timeout: 5s
+        restart: unless-stopped
+    mailhog:
+        image: 'mailhog/mailhog:latest'
+        ports:
+            - '${FORWARD_MAILHOG_PORT:-1025}:1025'
+            - '${FORWARD_MAILHOG_DASHBOARD_PORT:-8025}:8025'
+        networks:
+            - nova_site
+    nginx:
+        image: 'nginx:stable-alpine'
+        ports:
+            - '${APP_PORT:-80}:80'
+        volumes:
+            - '.:/var/www/html'
+            - './docker/nginx:/etc/nginx/conf.d'
+        networks:
+            - nova_site
+        depends_on:
+            - app
+        restart: unless-stopped
 networks:
-    laravel_network:
+    nova_site:
         driver: bridge
+volumes:
+    nova_site-pgsql:
+        driver: local
